@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const router = (0, express_1.Router)();
+let userList = [];
 router.get("/hello", (req, res) => {
     res.json({
         msg: "Hello world!"
@@ -24,5 +25,12 @@ router.post("/sum", (req, res) => {
     });
 });
 router.post("/users", (req, res) => {
+    const data = req.body;
+    let user = {
+        name: data.name,
+        email: data.email
+    };
+    userList.push(user);
+    res.json("User successfully added");
 });
 exports.default = router;

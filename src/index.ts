@@ -1,7 +1,11 @@
 import {Request, Response, Router} from "express"
-import fs from "fs"
-import { compile } from "morgan"
 const router: Router = Router()
+type TUser = {
+    name: String,
+    email: String
+}
+
+let userList: TUser[] = []
 
 router.get("/hello", (req: Request, res: Response) => {
     res.json({
@@ -29,7 +33,13 @@ router.post("/sum", (req: Request, res: Response) => {
 })
 
 router.post("/users", (req: Request, res: Response) => {
-    
+    const data = req.body
+    let user: TUser = {
+        name: data.name,
+        email: data.email
+    }
+    userList.push(user)
+    res.json("User successfully added")
 })
 
 export default router
