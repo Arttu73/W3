@@ -1,4 +1,5 @@
 import {Request, Response, Router} from "express"
+import path from "path"
 const router: Router = Router()
 type TUser = {
     name: String,
@@ -7,8 +8,8 @@ type TUser = {
 
 let userList: TUser[] = []
 
-router.get("/", (req: Request, res, Response) => {
-    res.render('index')
+router.get("/", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "../../public", "index.html"))
 })
 
 router.get("/hello", (req: Request, res: Response) => {
@@ -37,6 +38,7 @@ router.post("/sum", (req: Request, res: Response) => {
 })
 
 router.post("/users", (req: Request, res: Response) => {
+    console.log("recieved data:", req.body)
     const data = req.body
     let user: TUser = {
         name: data.name,

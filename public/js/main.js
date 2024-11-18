@@ -1,25 +1,17 @@
-function initialize() {
-    const userForm = document.getElementById("userForm")
+
+const userForm = document.getElementById("userForm")
     
 
-    userForm.addEventListener("submit", async function() {
-        const emailInput = document.getElementById("email")
-        const nameInput = document.getElementById("name")
-        const submit = document.getElementById("submit")
-        const inputData = await fetch("https://localhost:3000/users", {
-            method: "post",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: {
-                "name": nameInput.value,
-                "email": emailInput.value
-            }
-        })
-        const response = await inputData.json()
-        console.log(response)
-
+userForm.addEventListener("submit", async function() {
+    const emailInput = document.getElementById("email").value
+    const nameInput = document.getElementById("name").value
+    const inputData = { name: nameInput, email: emailInput }
+    await fetch("http://localhost:3000/users", {
+        method: "post",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(inputData)
     })
-}
-
-initialize()
+        .then((response) => response.json())
+})
