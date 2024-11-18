@@ -7,6 +7,10 @@ type TUser = {
 
 let userList: TUser[] = []
 
+router.get("/", (req: Request, res, Response) => {
+    res.render('index')
+})
+
 router.get("/hello", (req: Request, res: Response) => {
     res.json({
         msg: "Hello world!"
